@@ -11,30 +11,30 @@ Travail demandé
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Filtrage intelligent de données</title>
 </head>
 <body>
     <?php
     $notes=[12,5,18,9,14,20,7,11,16,8];
-    //filtrer les notes >=10
+
     $notesSup10=array_filter($notes,function($notes){
         return $notes>=10;
     });
     print_r($notesSup10);
     echo"<br/>";
-    //extraire les notes >=15
+
     $notesSup15=array_filter($notes,function($notes){
         return $notes>=15;
     });
     print_r($notesSup15);
     echo"<br/>";
-    //identifier les notes <10
+
     $notesInf10=array_filter($notes,function($notes){
         return $notes<10;
     });
     print_r($notesInf10);
     echo"<br/>";
-    //créer une fonction de filtrage réutilisable
+
     function filtrerNotes($notes,$seuil,$comparaison){
         return array_filter($notes,function($note) use ($seuil,$comparaison){
             switch($comparaison){
@@ -47,7 +47,7 @@ Travail demandé
             }
         });
     }
-    //exemple d'utilisation de la fonction de filtrage réutilisable
+    
     $notesSup12=filtrerNotes($notes,12,'>=');
     print_r($notesSup12);
     echo"<br/>";
