@@ -40,19 +40,19 @@ NB. il est recommandé d'utiliser les données pour garder les données , et pou
 
         if(empty($email)){
             $errors['email']='l\'email est obligatoire';
-        }elseif(!filtrer_var($email,FILTRER_VALIDATE_EMAIL)){
+        }elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)){
             $errors['email']='l\'email n\'est pas valide';
         }
         
         if(empty($url)){
             $errors['url']='l\'url est obligatoire';
-        }elseif(!filtrer_var($url,FILRER_VALIDATE_URL)){
+        }elseif(!filter_var($url,FILTER_VALIDATE_URL)){
             $errors['url']='l\'url n\'est pas valide';
         }
         
         if(empty($age)){
             $errors['age']='l\'age est obligatoire';
-        }elseif(!filtrer_var($age,FILTRER_VALIDATE_INT)){
+        }elseif(!filter_var($age,FILTER_VALIDATE_INT)){
             $errors['age']='l\'age doit etre un nombre entier';
         }
 
