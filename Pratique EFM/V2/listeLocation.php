@@ -8,7 +8,7 @@
     $date_fin=$_POST['date_fin']??'';
 
     if(!empty($date_debut)&&!empty($date_fin)){
-        $sql.=" where date_debut>=? and date_fin<=?";
+        $sql.=" where l.date_debut_location>=? and l.date_fin_location<=?";
         $stmt=$cnx->prepare($sql);
         $stmt->execute([$date_debut,$date_fin]);
     }else{
@@ -47,17 +47,19 @@
                     <th>prix location</th>
                     <th>type</th>
                     <th>disponibilite</th>
+                    <th>date debut - date fin</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($stmt->fetchAll(PDO::Fetch_ASSOC) as $I):?>
                     <tr>
-                        <td><?=$I['id']?></td>
+                        <td><?=$I['id_location']?></td>
                         <td><?=$I['titre']?></td>
                         <td><?=$I['adresse']?></td>
-                         <td><?=$I['prix_location']?></td>
-                         <td><?=$I['type']?></td>
-                         <td><?=$I['disponibilite']?></td>
+                        <td><?=$I['prix_location']?></td>
+                        <td><?=$I['id_type']?></td>
+                        <td><?=$I['disponible']?></td>
+                        <td><?=$I['date_debut_location']?> - <?=$I['date_fin_location']?></td>
                      </tr>
                 <?php endforeach;?>
             </tbody>
