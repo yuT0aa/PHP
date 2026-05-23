@@ -1,16 +1,18 @@
 <?php
     require('config.php');
-    $req="select * from type";
-    $stmt=$cnx->query($req);
-    $stmt->execute();
-    $types=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if(isset($_GET["id"])){
-        $selected_id=$_GET["id"];
-        $req="select * from immobilier where id=?";
-        $stmt=$cnx->prepare($req);
-        $stmt->execute([$selected_id]);
-        $data=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "SELECT l.id_location, i.id_immobilier, i.titre, i.adresse, i.prixlocation, i.id_type, i.disponible, l.date_debut_location, l.date_fin_location 
+            FROM location l
+            JOIN immobilier i ON l.id_immobilier = i.id_immobilier";
+    $date_debut=$_POST['date_debut']??'';
+    $date_fin=$_POST['date_fin']??'';
+
+    if(!empty($date_debut)&&!empty($date_fin)){
+        $sql.=" where date_debut>=? and date_fin<=?";
+        $stmt=$cnx->prepare($sql);
+        $stmt->execute([$date_debut,$date_fin]);
+    }else{
+        $stmt=$cnx->query($sql);   
     }
 ?>
 
@@ -22,37 +24,44 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container mt-3">
-        <h2>Modifier un immobilier</h2>
+    <div class="container">
+        <h2>Rechercher des locations entre deux dates</h2>
         <form method="post" action="">
             <div class="form-group">
-                <label for="">Titre</label>
-                <input type="text" name="titre" class="form-control" value="<?=$data[0]['titre']?>">
+                <label for="">Date debut</label>
+                <input type="date" name="date_debut" class="form-control">
             </div>
             <div class="form-group">
-                <label for="">Adresse</label>
-                <input type="text" name="adresse" class="form-control" value="<?=$data[0]['adresse']?>">
+                <label for="">Date fin</label>
+                <input type="date" name="date_fin" class="form-control">
             </div>
-            <div class="form-group">
-                <label for="">Prix location</label>
-                <input type="number" name="prix_location" class="form-control" value="<?=$data[0]['prix_location']?>">
-            </div>
-            <div class="form-group">
-                <label for="">Type</label>
-                <select name="type" class="form-control">
-                    <?php foreach($types as $T):?>
-                        <option value="<?=$T['id']?>" <?php if($T['id']==$data[0]['type']){echo "selected";}?>>
-                            <?=$T['libelle']?>
-                        </option>
-                    <?php endforeach;?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Disponibilite</label>
-                <input type="text" name="disponibilite" class="form-control" value="<?=$data[0]['disponibilite']?>">
-            </div>
-            <button type="submit" class="btn btn-primary">Modifier</button>
+            <button type="submit" class="btn btn-sm btn-primary">Search</button>
         </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>id</th>
+                    <th>titre</th>
+                    <th>adresse</th>
+                    <th>prix location</th>
+                    <th>type</th>
+                    <th>disponibilite</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($stmt->fetchAll(PDO::Fetch_ASSOC) as $I):?>
+                    <tr>
+                        <td><?=$I['id']?></td>
+                        <td><?=$I['titre']?></td>
+                        <td><?=$I['adresse']?></td>
+                         <td><?=$I['prix_location']?></td>
+                         <td><?=$I['type']?></td>
+                         <td><?=$I['disponibilite']?></td>
+                     </tr>
+                <?php endforeach;?>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
