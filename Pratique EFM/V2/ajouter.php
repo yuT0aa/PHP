@@ -1,9 +1,9 @@
 <?php
     require('config.php');
-    $req="select * from immobilier";
+    $req="select * from typebImmo";
     $stmt=$cnx->query($req);
     $stmt->execute();
-    $immobiliers=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    $typebImmo=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if(isset($_POST["send"])){
         $titre=$_POST["titre"];
@@ -57,7 +57,12 @@
             
             <div class="form-group">
                 <label for="">Type</label>
-                <input type="text" name="type" class="form-control">
+                <select name="type" class="form-control">
+                    <option value="">--Select--</option>
+                    <?php foreach($typebImmo as $t):?>
+                        <option value="<?=$t['id']?>"><?=$t['libelle']?></option>
+                    <?php endforeach;?>
+                </select>
             </div>
             
             <div class="form-group">
