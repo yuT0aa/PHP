@@ -39,6 +39,7 @@
                         <td><?=$I['prix_location']?></td>
                         <td><?=$I['type']?></td>
                         <td><?=$I['disponibilite']?></td>
+                        <td><a href="delete.php?id=<?=$I['id']?>" class="btn btn-sm btn-danger">Delete</a></td>
                     </tr>
                 <?php endforeach;?>
             </tbody>
