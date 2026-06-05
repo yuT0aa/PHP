@@ -12,7 +12,6 @@ $erreurs = [];
 if (!preg_match('/^INS\d{5}$/', $_SESSION['idStagiaire'])) {
     // Note: Selon votre BDD, l'ID peut être numérique. Si le login est INS12345, adaptez la regex.
 }
-
 // Traitement du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idFormation = $_POST['formation'];
