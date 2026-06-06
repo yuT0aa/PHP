@@ -29,12 +29,12 @@
         <tbody>
             <?php foreach($pro as $p){?>
                 <tr>
-                    <td><?php echo $p['code_Pro']; ?></td>
-                    <td><?php echo $p['Nom_Pro']; ?></td>
-                    <td><?php echo $p['Status_Pro']; ?></td>
-                    <td><?php echo $p['Adresse_Pro']; ?></td>
-                    <td><?php echo $p['Date_Naissance']; ?></td>
-                    <td><?php echo $p['salaire']; ?></td>
+                    <td><?= htmlspecialchars($p['code_Pro']); ?></td>
+                    <td><?= htmlspecialchars($p['Nom_Pro']); ?></td>
+                    <td><?= htmlspecialchars($p['Status_Pro']); ?></td>
+                    <td><?= htmlspecialchars($p['Adresse_Pro']); ?></td>
+                    <td><?= htmlspecialchars($p['Date_Naissance']); ?></td>
+                    <td><?= htmlspecialchars($p['salaire']); ?></td>
                 </tr>
             <?php }?> 
         </tbody>
