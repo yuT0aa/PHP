@@ -20,15 +20,15 @@
             $salaire=$_POST['salaire'];
 
             try{
-                $sql="INSERT INTO Professeur(code_Pro, nom_Pro, Statut_Pro, Adresse_Pro, Date_Naissance, salaire) 
-                      VALUES (?, ?, ?, ?, ?, ?)";
+                $sql="INSERT INTO Professeur(code_Pro,nom_Pro,Statut_Pro,Adresse_Pro,Date_Naissance,salaire) 
+                      VALUES (?,?,?,?,?,?)";
 
                 $stmt=$cnx->prepare($sql);
-                $stmt->execute([$code_Pro, $nom_Pro, $Statut_Pro, $Adresse_Pro, $Date_Naissance, $salaire]);
-                header("Location: lister.php");
+                $stmt->execute([$code_Pro,$nom_Pro,$Statut_Pro,$Adresse_Pro,$Date_Naissance,$salaire]);
+                header("Location:lister.php");
             exit();
             } catch(PDOException $e) {
-                echo("Erreur: " . $e->getMessage());
+                echo("Erreur:".$e->getMessage());
             }  
         }else{
             echo "Veuillez remplir tous les champs.";
@@ -39,7 +39,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Gestion des Professeurs</title>
 </head>
 <body>
