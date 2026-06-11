@@ -15,6 +15,7 @@
 </head>
 <body>
     <h2>Liste des Professeurs</h2>
+    <a href="ajout.php" name="send">Ajouter</a>
     <table>
         <thead>
             <tr>
